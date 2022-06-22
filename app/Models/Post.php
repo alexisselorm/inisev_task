@@ -9,8 +9,8 @@ class Post extends Model
 {
     use HasFactory;
 
-
-    protected $fillable = ['title', 'body', 'website_id'];
+    // protected $fillable = ['title', 'body', 'website_id'];
+    protected $guarded = ['id'];
 
     public function website()
     {

@@ -17,8 +17,10 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('body');
+            $table->string('post_code')->unique();
             $table->foreignId('website_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->boolean('published')->default(false);
+
             $table->timestamps();
         });
     }
