@@ -26,6 +26,6 @@ Route::prefix('websites')->group(function (){
 Route::prefix('posts')->group(function (){
 
     Route::get('index', [PostController::class, 'index']);
-    Route::post('store', [PostController::class, 'store']);
+    Route::post('save', [PostController::class, 'store']);
 
 });
