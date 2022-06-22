@@ -9,6 +9,7 @@ use App\Helper\RequestHelpers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -59,11 +60,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'body' => 'required',
-            'website_code' => 'required'
-        ]);
+       $data = $request->only(['title', 'body', 'website_code']);
+
+        // Validate form fields
+        $validate = Validator::make($data, $this->validatePostFields());
+
+        if ($validate->fails()){
+            return $this->helper->failResponse($validate->errors()->first());
+        }
+
+        // Check if selected website exists
+        $validate_website = Website::query()->where('code', $data['website_code'])->first();
+
         $validate_website = Website::query()->where('code', $data['website_code'])->first();
 
 

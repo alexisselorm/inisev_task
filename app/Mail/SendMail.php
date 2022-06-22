@@ -12,7 +12,7 @@ class SendMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
-    private $email;
+    public $email;
 
     /**
      * Create a new message instance.
